@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 // Definir classe user extends model
 class User extends Model {
   // Definir metodo extatico chamado init, vai receber sequelize como parametro
-  // Vai ser chamado automaticamente pelo sequelize
+  // Vai ser chamado automaticamente pelo sequelize.
   static init(sequelize) {
     super.init(
       {
