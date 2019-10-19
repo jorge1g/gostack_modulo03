@@ -1,0 +1,12 @@
+// Sequelize exporta os caminhos que estão os arquivos e pastas criados.
+// Sequelize não consegue utilizar o formato import e export
+// Importar resole do path para padronizar os caminhos tanto no Windows como no Mac
+const { resolve } = require('path');
+// Exporta objetos
+module.exports = {
+  // Retornar caminho exato do arquivo de config do database, começa com dirname 
+  config: resolve(__dirname, 'src', 'config', 'database.js'),
+  'models-path': resolve(__dirname, 'src', 'app', 'models'),
+  'migrations-path': resolve(__dirname, 'src', 'database', 'migrations'),
+  'seeders-path': resolve(__dirname, 'src', 'database', 'seeds'),
+}
