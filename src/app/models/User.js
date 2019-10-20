@@ -45,7 +45,7 @@ class User extends Model {
   static associate(models) {
     // belongsTo é um tipo de relacionamento que seria "pertence a"
     // Models de usuario pertence ao model de file, isto que dizer que vamos ter
-    // um id de arquivo sendo aramzenado no model de usuario, que é avatar_id
+    // um id de arquivo sendo armazenado no model de usuario, que é avatar_id
     // Passado um codinome para avatar_id atraves de as:
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }

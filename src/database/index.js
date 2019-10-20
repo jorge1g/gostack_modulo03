@@ -3,10 +3,11 @@ import Sequelize from 'sequelize';
 // Importar os models
 import User from '../app/models/User';
 import File from '../app/models/File';
+import Appointment from '../app/models/Appointment';
 // Importar configurações do banco de dados.
 import databaseConfig from '../config/database';
 // Criar array com todos os models da aplicação
-const models = [User, File];
+const models = [User, File, Appointment];
 // Criar a classe database
 class Database {
   // Inserir metodo constructor
@@ -21,6 +22,7 @@ class Database {
     // A variavel connection é a que esta sendo esperada dentro dos models, dentro do metodo init
     this.connection = new Sequelize(databaseConfig);
     // Percorrer o array, de cada model e o metodo init, para passar a conexão
+    // Loader de models
     models
       .map(model => model.init(this.connection))
       // Inserido map para adicionar avatar
