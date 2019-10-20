@@ -13,6 +13,15 @@ class File extends Model {
         // Inserir somente colunas que serão usadas no cadastramento de novo usuario
         name: Sequelize.STRING,
         path: Sequelize.STRING,
+        // Inserir dados de url da imagem
+        url: {
+          type: Sequelize.VIRTUAL,
+          // Usaremos o metodo get para formatar este valor
+          get() {
+            // Inserir o http e nome do arquivo atraves de this.path (que se referem as variaveis de name e path acima)
+            return `http://localhost:3333/files/${this.path}`;
+          },
+        },
       },
       {
         // O sequelize recebido como parametro precisa ser passado dentro de um objeto

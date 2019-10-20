@@ -2,6 +2,8 @@
 // Instalando sucrase para poder utilizar o import
 // _const express = require('express');//Maneira antiga
 import express from 'express';
+// Importar o path do routes para passar o caminho para o express.static
+import path from 'path';
 // Definir variavel com a rota
 // _const routes = require('./routes');//Maneira antiga
 import routes from './routes';
@@ -23,6 +25,12 @@ class App {
   middleware() {
     // Configurar para receber requisições no formato de JSON
     this.server.use(express.json());
+    // Usar express.static para disponibilizar arquivos que serão acessados pelo navegador
+    this.server.use(
+      // Rota que vai disponibilizar os arquivos estaticos
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   // Cadastrar as rotas da aplicação

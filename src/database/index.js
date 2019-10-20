@@ -21,7 +21,12 @@ class Database {
     // A variavel connection é a que esta sendo esperada dentro dos models, dentro do metodo init
     this.connection = new Sequelize(databaseConfig);
     // Percorrer o array, de cada model e o metodo init, para passar a conexão
-    models.map(model => model.init(this.connection));
+    models
+      .map(model => model.init(this.connection))
+      // Inserido map para adicionar avatar
+      // Percorre os models e só chama o model.associate (segunda parte)se o mesmo existir
+      // Se existir, chama o metodo passando os models localizados dentro dos parentesis
+      .map(model => model.associate && model.associate(this.connection.models));
   }
 }
 

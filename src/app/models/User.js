@@ -40,6 +40,16 @@ class User extends Model {
     return this;
   }
 
+  // Relacionando o metodo de users com o de files
+  // O metodo associate vai receber todos os models da aplicação
+  static associate(models) {
+    // belongsTo é um tipo de relacionamento que seria "pertence a"
+    // Models de usuario pertence ao model de file, isto que dizer que vamos ter
+    // um id de arquivo sendo aramzenado no model de usuario, que é avatar_id
+    // Passado um codinome para avatar_id atraves de as:
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+  }
+
   // Pode-se criar metodo novo dentro da classe
   // Criar metodo para verificação de password do usuario que esta tentando autenticar
   checkPassword(password) {

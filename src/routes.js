@@ -15,6 +15,8 @@ import SessionController from './app/controllers/SessionController';
 import authMiddleware from './app/middlewares/auth';
 // Importar filecontroller
 import FileController from './app/controllers/FileController';
+// Importar provider controller
+import ProviderController from './app/controllers/ProviderController';
 
 // Definir variavel com os dados do Router
 const routes = new Router();
@@ -28,6 +30,8 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 // Criar rota para para atualizar dados
 routes.put('/users', UserController.update);
+// Criar rota para provider
+routes.get('/providers', ProviderController.index);
 // Criar rota post para files. Como segundo parametro colocamos um middleware a mais
 // que vai se chamar upload (definido acima) sendo single (um arquivo por vez)
 // eenviando o nome do campo em file.
