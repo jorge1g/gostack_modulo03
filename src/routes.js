@@ -17,6 +17,10 @@ import authMiddleware from './app/middlewares/auth';
 import FileController from './app/controllers/FileController';
 // Importar provider controller
 import ProviderController from './app/controllers/ProviderController';
+//
+import AppointmentController from './app/controllers/AppointmentController';
+//
+import ScheduleController from './app/controllers/ScheduleController';
 
 // Definir variavel com os dados do Router
 const routes = new Router();
@@ -32,6 +36,13 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 // Criar rota para provider
 routes.get('/providers', ProviderController.index);
+// Criar rota para listagem dos agendamentos do usuario logado
+routes.get('/appointments', AppointmentController.index);
+// Criar rota appointment conforme controllers
+routes.post('/appointments', AppointmentController.store);
+//
+routes.get('/schedules', ScheduleController.index);
+
 // Criar rota post para files. Como segundo parametro colocamos um middleware a mais
 // que vai se chamar upload (definido acima) sendo single (um arquivo por vez)
 // eenviando o nome do campo em file.
