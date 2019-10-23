@@ -21,6 +21,8 @@ import ProviderController from './app/controllers/ProviderController';
 import AppointmentController from './app/controllers/AppointmentController';
 //
 import ScheduleController from './app/controllers/ScheduleController';
+//
+import NotificationController from './app/controllers/NotificationController';
 
 // Definir variavel com os dados do Router
 const routes = new Router();
@@ -42,7 +44,8 @@ routes.get('/appointments', AppointmentController.index);
 routes.post('/appointments', AppointmentController.store);
 //
 routes.get('/schedules', ScheduleController.index);
-
+// Criar rota de notificaçoes, somente para prestadores de serviço
+routes.get('notifications', NotificationController.index);
 // Criar rota post para files. Como segundo parametro colocamos um middleware a mais
 // que vai se chamar upload (definido acima) sendo single (um arquivo por vez)
 // eenviando o nome do campo em file.

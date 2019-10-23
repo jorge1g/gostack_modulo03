@@ -1,14 +1,16 @@
 // importar o Yup para fazer validação
 import * as Yup from 'yup';
 // Importar tres metodos do date-fns e não a biblioteca toda
-import { startOfHour, parseISO, isBefore } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 // Importar o model de ususarios
 import User from '../models/User';
 // Importar o model de File
 import File from '../models/File';
-
 //  Importar o model de appointment
 import Appointment from '../models/Appointment';
+//
+import Notification from '../schemas/Notification';
 
 // criar classe AppointmentController
 class AppointmentController {
@@ -71,12 +73,12 @@ class AppointmentController {
      *  Check if provider_id is a provider
      */
     // Encontrar um registro (findOne) com as condições (where)
-    const isProvider = await User.findOne({
+    const checkIsProvider = await User.findOne({
       // Um registro onde o registro do usuario seja provider_id e o provider seja true
       where: { id: provider_id, provider: true },
     });
     // Se não encontrar nenhum usuario (false)
-    if (!isProvider) {
+    if (!checkIsProvider) {
       // Retorna uma mensagem de erro
       return res
         .status(401)
@@ -119,6 +121,21 @@ class AppointmentController {
       user_id: req.userId, // req.userId é setado automaticamente quando o usuario faz login
       provider_id, // Campo pego do req.body
       date: hourStart,
+    });
+
+    /**
+     *  Notify appointment provider
+     */
+    const user = await User.findByPk(req.userId);
+    const formattedDate = format(
+      hourStart,
+      "'dia' dd 'de' MMMM', as' H:mm'h'",
+      { locale: pt }
+    );
+
+    await Notification.create({
+      content: `Novo agendamento de ${user.name} para ${formattedDate}`,
+      user: provider_id,
     });
 
     return res.json(appointment);
