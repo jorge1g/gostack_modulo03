@@ -43,9 +43,13 @@ routes.get('/appointments', AppointmentController.index);
 // Criar rota appointment conforme controllers
 routes.post('/appointments', AppointmentController.store);
 //
+routes.delete('/appointments/:id', AppointmentController.delete);
+//
 routes.get('/schedules', ScheduleController.index);
 // Criar rota de notificaçoes, somente para prestadores de serviço
-routes.get('notifications', NotificationController.index);
+routes.get('/notifications', NotificationController.index);
+// Rota para marcar notificação como lida
+routes.put('/notifications/:id', NotificationController.update);
 // Criar rota post para files. Como segundo parametro colocamos um middleware a mais
 // que vai se chamar upload (definido acima) sendo single (um arquivo por vez)
 // eenviando o nome do campo em file.
