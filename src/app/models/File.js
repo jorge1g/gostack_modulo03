@@ -19,7 +19,7 @@ class File extends Model {
           // Usaremos o metodo get para formatar este valor
           get() {
             // Inserir o http e nome do arquivo atraves de this.path (que se referem as variaveis de name e path acima)
-            return `http://localhost:3333/files/${this.path}`;
+            return `${process.env.APP_URL}/files/${this.path}`;
           },
         },
       },

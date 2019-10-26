@@ -37,7 +37,7 @@ class Database {
   mongo() {
     this.mongoConnection = mongoose.connect(
       // url de conexão do mongo
-      'mongodb://localhost:27017/gobarber',
+      process.env.MONGO_URL,
       // Objetos de configuração
       {
         useNewUrlParser: true,
