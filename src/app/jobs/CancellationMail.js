@@ -13,6 +13,7 @@ class CancellationMail {
     // Neste data vai chegar todas as informações de envio de email
     const { appointment } = data;
 
+    // eslint-disable-next-line no-console
     console.log('A fila executou');
 
     await Mail.sendMail({

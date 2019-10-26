@@ -23,6 +23,8 @@ import AppointmentController from './app/controllers/AppointmentController';
 import ScheduleController from './app/controllers/ScheduleController';
 //
 import NotificationController from './app/controllers/NotificationController';
+//
+import AvailableController from './app/controllers/AvailableController';
 
 // Definir variavel com os dados do Router
 const routes = new Router();
@@ -38,6 +40,8 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 // Criar rota para provider
 routes.get('/providers', ProviderController.index);
+// Rota para todos os horarios disponiveis para este Id. Importando o metodo index
+routes.get('/providers/:providerId/available', AvailableController.index);
 // Criar rota para listagem dos agendamentos do usuario logado
 routes.get('/appointments', AppointmentController.index);
 // Criar rota appointment conforme controllers

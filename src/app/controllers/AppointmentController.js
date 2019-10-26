@@ -28,7 +28,7 @@ class AppointmentController {
       // Ordenar os agendamentos por data
       order: ['date'],
       // Definir quais ados serão mostrados
-      attributes: ['id', 'date'],
+      attributes: ['id', 'date', 'past', 'cancelable'],
       // Listar 20 registros por vez
       limit: 20,
       // Calculo de quantos registros se pula por pagina

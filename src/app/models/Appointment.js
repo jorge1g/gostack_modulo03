@@ -1,6 +1,7 @@
 // Importar model de dentro do sequelize
 // Importar sequelize d dentro do sequelize
 import Sequelize, { Model } from 'sequelize';
+import { isBefore, subHours } from 'date-fns';
 
 // Definir classe user extends model
 class Appointment extends Model {
@@ -13,6 +14,23 @@ class Appointment extends Model {
         // Inserir somente colunas que serão usadas no cadastramento de novo serviço
         date: Sequelize.DATE,
         canceled_at: Sequelize.DATE,
+        // Agendamentos já passados
+        past: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            // Verificar se a data do lançamento é inferior a data atual
+            // retorna true se a data passou e false se ainda não tenha passado
+            return isBefore(this.date, new Date());
+          },
+        },
+        // Verificar se o agendamento é cancelavel oiu não (duas horas antes)
+        cancelable: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            // Verifica se a data atual e inferior a subHours menos 2 horas
+            return isBefore(new Date(), subHours(this.date, 2));
+          },
+        },
       },
       {
         // O sequelize recebido como parametro precisa ser passado dentro de um objeto
